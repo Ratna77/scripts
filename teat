@@ -1,0 +1,20 @@
+Here is a simple shell script that will generate the last day of each month for the 11 months prior to the given date:
+
+```sh
+#!/bin/bash
+
+# Assuming the input date is in 'YYYY-MM-DD' format
+input_date="2024-01-29"
+
+# Convert the input date to 'YYYYMMDD' format for the 'date' command
+formatted_date=$(date -d "$input_date" +%Y%m%d)
+
+for i in {1..11}
+do
+  # Get the last day of the month, 11 months prior
+  output_date=$(date -d "$formatted_date -${i} month -$(($(date -d "$formatted_date -${i} month" +%d)-1)) days" +%Y-%m-%d)
+  echo $output_date
+done
+```
+
+Copy and paste this script into your shell environment or a `.sh` file to execute. Make sure to replace the `input_date` variable with your actual input date. The script uses a loop to subtract one month at a time from the input date and then adjusts to find the last day of that month, printing it in 'YYYY-MM-DD' format.
